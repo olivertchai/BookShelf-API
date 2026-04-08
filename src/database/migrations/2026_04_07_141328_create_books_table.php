@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('genre_id')->constrained()->onDelete('cascade');
+            $table->string('title');
+            $table->string('author');
+            $table->integer('pages')->nullable();
+            $table->enum('status', ['to_read', 'reading', 'finished'])->default('to_read');
+            // Rating (1-5, aceita nulo)
+            $table->unsignedTinyInteger('rating')->nullable();
             $table->timestamps();
         });
     }
